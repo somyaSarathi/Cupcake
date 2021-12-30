@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord.ext.commands.errors import BadArgument
-from main import imgBook, imgCrime, imgLost, imgFormat
+from main import imgCrime, imgLost
 from api.compiler import Compiler
 
 
