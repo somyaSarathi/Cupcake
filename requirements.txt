@@ -3,3 +3,5 @@ python-dotenv==0.19.2
 requests==2.26.0
 black==21.12b0
 discord-components==2.1.2
+youtube-dl==2021.12.17
+spotdl==3.9.1
