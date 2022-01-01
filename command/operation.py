@@ -6,7 +6,7 @@ import logging
 
 
 
-class Interact(commands.Cog):
+class Operation(commands.Cog):
     def __init__(self, bot: commands.Context) -> None:
         self.bot = bot
 
@@ -61,4 +61,4 @@ class Interact(commands.Cog):
 
 
 def setup(bot: commands.Bot):
-    bot.add_cog(Interact(bot))
+    bot.add_cog(Operation(bot))
