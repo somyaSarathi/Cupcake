@@ -1,8 +1,8 @@
 import discord
-from discord import channel
 from discord.ext import commands
-import youtube_dl
+# import youtube_dl
 from os import system
+
 
 
 class Music(commands.Cog):
@@ -13,7 +13,6 @@ class Music(commands.Cog):
     @commands.command()
     async def join(self, ctx: commands.Context):
         channel = ctx.author.voice.channel
-        print(channel)
         await channel.connect()
 
 

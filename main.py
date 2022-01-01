@@ -4,7 +4,6 @@ import discord
 import logging
 from discord.embeds import Embed
 from discord.ext import commands
-from discord.ext.commands import errors
 from dotenv import load_dotenv
 
 
@@ -40,6 +39,7 @@ imgChew    = discord.File('./img/chew.jpg'    , filename='chew.jpg')
 imgCrime   = discord.File('./img/crime.jpg'   , filename='crime.jpg')
 imgLost    = discord.File('./img/lost.jpg'    , filename='lost.jpg')
 imgFormat  = discord.File('./img/format.png'  , filename='format.png')
+imgCount   = discord.File('./img/count.jpg'   , filename='count.jpg')
 
 
 
