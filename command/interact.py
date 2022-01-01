@@ -12,6 +12,7 @@ class Interact(commands.Cog):
 
     
     @commands.command()
+    @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx: commands.Context, *, args=None):
         # delete all of the messages
         if args is None:
@@ -52,6 +53,10 @@ class Interact(commands.Cog):
 
             # reply
             await ctx.reply( file=imgCount, embed=embed )
+
+        
+        if isinstance(error, commands.MissingPermissions):
+            await ctx.reply(f"I'm sorry {ctx.author.mention} you don't have the permissions to delete the messages")
 
 
 
