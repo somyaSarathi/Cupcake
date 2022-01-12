@@ -100,7 +100,7 @@ if __name__ == '__main__':
     for filename in os.listdir('./command'):
         if filename.endswith('.py'):
             bot.load_extension(f'command.{filename[: -3]}')
-            print(f'    ✔️ Loaded {filename}')
+            print(f'  ✔️ Loaded {filename}')
 
     print('✅ Extention(s) loaded successfully!\n')
     
