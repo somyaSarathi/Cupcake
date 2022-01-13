@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from main import imgCrime, imgLost
+from main import imgCrime, imgLost, imgRestrict
 from api.compiler import Compiler
 
 
@@ -54,9 +54,8 @@ class Solve(commands.Cog):
     async def run_error(self, ctx: commands.Context, error):
         # trigger typing indicator
         await ctx.trigger_typing()
-        print(error, type(error))
 
-
+        # code not formatted properly
         if isinstance(error, commands.BadArgument):
             # embed
             embed = discord.Embed( title='Wrong format', description='Make sure to pack the code with `\`` and don\'t forget to mention the language.', color=0xFBBC04 )
@@ -69,7 +68,7 @@ class Solve(commands.Cog):
             # reply
             await ctx.reply( embed=embed )
 
-
+        # missing code
         elif isinstance(error, commands.MissingRequiredArgument):
             # embed
             embed = discord.Embed( title='Code Missing!', description='You are missing few arguments. Make sure to pack the code within `\`` and don\'t forget to mention the language.', color=0xFBBC04 )
@@ -81,22 +80,23 @@ class Solve(commands.Cog):
             # reply
             await ctx.reply( file=imgLost, embed=embed )
 
-
+        # DM
         elif isinstance(error, commands.NoPrivateMessage):
             # embed
-            embed = discord.Embed( title='', description='' )
+            embed = discord.Embed( title='DMs are restricted', description='Bot command on the DM are restricted' )
             embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
 
-            embed.set_image( url='' )
+            embed.set_image( url='attachment://restrict.jpg' )
 
             # reply
-            await ctx.reply( file=None, embed=embed )
+            await ctx.reply( file=imgRestrict, embed=embed )
 
 
         else:
             embed = discord.Embed( title='oops! I may have chewed up the power cord.', description='Looks like I did something missrable', color=0xFBBC04 )
             embed.set_image( url='attachment://crime.jpg' )
 
+            # reply
             await ctx.reply( file=imgCrime, embed=embed )
 
 
