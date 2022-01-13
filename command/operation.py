@@ -12,6 +12,7 @@ class Operation(commands.Cog):
     
     #### clear message log ####
     @commands.command()
+    @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx: commands.Context, *, args=None):
         # delete all of the messages
@@ -54,6 +55,17 @@ class Operation(commands.Cog):
             # reply
             await ctx.reply( file=imgCount, embed=embed )
 
+        # DM
+        elif isinstance(error, commands.NoPrivateMessage):
+            # embed
+            embed = discord.Embed( title='DMs are restricted', description='Bot command on the DM are restricted' )
+            embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
+
+            embed.set_image( url='attachment://restrict.jpg' )
+
+            # reply
+            await ctx.reply( file=imgRestrict, embed=embed )
+
         
         if isinstance(error, commands.MissingPermissions):
             await ctx.reply(f"I'm sorry {ctx.author.mention} you don't have the permissions to delete the messages")
@@ -61,6 +73,7 @@ class Operation(commands.Cog):
 
     #### ban member ####
     @commands.command()
+    @commands.guild_only()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx: commands.Context, member: discord.Member, *, message: str=None):
         # trigger typing instance
@@ -102,6 +115,17 @@ class Operation(commands.Cog):
             # reply
             await ctx.reply( file=imgLost, embed=embed )
 
+        # DM
+        elif isinstance(error, commands.NoPrivateMessage):
+            # embed
+            embed = discord.Embed( title='DMs are restricted', description='Bot command on the DM are restricted' )
+            embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
+
+            embed.set_image( url='attachment://restrict.jpg' )
+
+            # reply
+            await ctx.reply( file=imgRestrict, embed=embed )
+
         else:
             embed = discord.Embed( title='oops! I may have chewed up the power cord.', description='Looks like I did something missrable', color=0xFBBC04 )
             embed.set_image( url='attachment://crime.jpg' )
@@ -112,6 +136,7 @@ class Operation(commands.Cog):
 
     #### kick member ####
     @commands.command()
+    @commands.guild_only()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx: commands.Context, member: discord.Member, *, message):
         # trigger typing
@@ -152,6 +177,17 @@ class Operation(commands.Cog):
 
             # reply
             await ctx.reply( file=imgLost, embed=embed )
+
+        # DM
+        elif isinstance(error, commands.NoPrivateMessage):
+            # embed
+            embed = discord.Embed( title='DMs are restricted', description='Bot command on the DM are restricted' )
+            embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
+
+            embed.set_image( url='attachment://restrict.jpg' )
+
+            # reply
+            await ctx.reply( file=imgRestrict, embed=embed )
 
         else:
             embed = discord.Embed( title='oops! I may have chewed up the power cord.', description='Looks like I did something missrable', color=0xFBBC04 )
