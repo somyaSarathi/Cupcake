@@ -10,6 +10,7 @@ class Solve(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    @commands.guild_only()
     async def run(self, ctx: commands.Context, *, msg):
         # trigger typing indicator
         await ctx.trigger_typing()
@@ -53,6 +54,7 @@ class Solve(commands.Cog):
     async def run_error(self, ctx: commands.Context, error):
         # trigger typing indicator
         await ctx.trigger_typing()
+        print(error, type(error))
 
 
         if isinstance(error, commands.BadArgument):
@@ -78,6 +80,17 @@ class Solve(commands.Cog):
 
             # reply
             await ctx.reply( file=imgLost, embed=embed )
+
+
+        elif isinstance(error, commands.NoPrivateMessage):
+            # embed
+            embed = discord.Embed( title='', description='' )
+            embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
+
+            embed.set_image( url='' )
+
+            # reply
+            await ctx.reply( file=None, embed=embed )
 
 
         else:

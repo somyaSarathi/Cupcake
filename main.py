@@ -32,14 +32,15 @@ TOKEN: str = os.getenv('TOKEN')
 bot = commands.Bot(command_prefix='!', description='Good Boy Cupcake!', intents=intents)
 
 # loading images
-imgProfile = discord.File('./img/cupcake.png' , filename='cupcake.png')
-imgFetch   = discord.File('./img/fetching.jpg', filename='fetching.jpg')
-imgBook    = discord.File('./img/book.jpg'    , filename='book.jpg')
-imgChew    = discord.File('./img/chew.jpg'    , filename='chew.jpg')
-imgCrime   = discord.File('./img/crime.jpg'   , filename='crime.jpg')
-imgLost    = discord.File('./img/lost.jpg'    , filename='lost.jpg')
-imgFormat  = discord.File('./img/format.png'  , filename='format.png')
-imgCount   = discord.File('./img/count.jpg'   , filename='count.jpg')
+imgProfile  = discord.File('./img/cupcake.png' , filename='cupcake.png')
+imgFetch    = discord.File('./img/fetching.jpg', filename='fetching.jpg')
+imgBook     = discord.File('./img/book.jpg'    , filename='book.jpg')
+imgChew     = discord.File('./img/chew.jpg'    , filename='chew.jpg')
+imgCrime    = discord.File('./img/crime.jpg'   , filename='crime.jpg')
+imgLost     = discord.File('./img/lost.jpg'    , filename='lost.jpg')
+imgFormat   = discord.File('./img/format.png'  , filename='format.png')
+imgCount    = discord.File('./img/count.jpg'   , filename='count.jpg')
+imgRestrict = discord.File('./img/restrict.jpg', filename='restrict.jpg')
 
 
 
@@ -53,7 +54,7 @@ class MyClient(commands.Cog):
         '''
             prints message on the console after connecting.
         '''
-        print(f'[CONNECTED] connected as {self.bot.user.name} suceessfully')
+        print(f'[CONNECTED] connected as {self.bot.user.name} successfully')
         print(f'user id: {self.bot.user.id}', end = '\n\n')
 
 
@@ -95,7 +96,7 @@ class MyClient(commands.Cog):
 
 if __name__ == '__main__':
     # Load extention
-    print('loading extention(s)...')
+    print('\nloading extention(s)...')
 
     for filename in os.listdir('./command'):
         if filename.endswith('.py'):

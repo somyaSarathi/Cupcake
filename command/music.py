@@ -1,7 +1,7 @@
 import discord
+import youtube_dl
+from discord.utils import get
 from discord.ext import commands
-# import youtube_dl
-from os import system
 
 
 
@@ -11,8 +11,17 @@ class Music(commands.Cog):
 
     
     @commands.command()
+    @commands.guild_only()
     async def join(self, ctx: commands.Context):
+        voice_client = get(self.bot.voice_clients, guild=ctx.guild)
+
+        if voice_client and voice_client.is_connected():
+            await ctx.reply(f'I\'m already connected to {ctx.author.voice.channel.mention}')
+
+        # getting user's voice channel
         channel = ctx.author.voice.channel
+
+        # connecting to the voice channel
         await channel.connect()
 
 
@@ -23,7 +32,7 @@ class Music(commands.Cog):
 
     @join.error
     async def join_error(self, ctx: commands.Context, error):
-        print(error)
+        # AttributeError
         pass
 
 
