@@ -159,3 +159,4 @@ cython_debug/
 log/
 ffmpeg/
 music/
+commands/music.py.delete

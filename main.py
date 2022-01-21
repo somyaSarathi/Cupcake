@@ -16,11 +16,7 @@ logger.addHandler(handler)
 
 
 # gateway intents
-intents = discord.Intents.default()
-intents.typing = True
-intents.presences = True
-intents.reactions = True
-intents.members = True
+intents = discord.Intents.all()
 
 
 # load data from .env file
