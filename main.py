@@ -37,6 +37,7 @@ imgLost     = discord.File('./img/lost.jpg'    , filename='lost.jpg')
 imgFormat   = discord.File('./img/format.png'  , filename='format.png')
 imgCount    = discord.File('./img/count.jpg'   , filename='count.jpg')
 imgRestrict = discord.File('./img/restrict.jpg', filename='restrict.jpg')
+imgMap      = discord.File('./img/map.jpg'     , filename='map.jpg')
 
 
 
