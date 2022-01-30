@@ -72,5 +72,25 @@ class Music(commands.Cog):
             vc.play(source)
 
 
+    @commands.command()
+    @commands.guild_only()
+    async def stop(self, ctx: commands.Context):
+        ctx.voice_client.stop()
+
+
+    @commands.command()
+    @commands.guild_only()
+    async def pause(self, ctx: commands.Context):
+        if ctx.voice_client.is_playing():
+            ctx.voice_client.pause()
+
+
+    @commands.command()
+    @commands.guild_only()
+    async def resume(self, ctx: commands.Context):
+        if ctx.voice_client.is_paused():
+            ctx.voice_client.resume()
+
+
 def setup(bot: commands.Bot):
     bot.add_cog(Music(bot))

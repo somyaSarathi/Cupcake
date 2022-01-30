@@ -1,9 +1,9 @@
 discord.py==1.7.3
 python-dotenv==0.19.2
 requests==2.26.0
-black==21.12b0
-discord-components==2.1.2
 youtube-dl==2021.12.17
 spotdl==3.9.1
 geopy==2.2.0
 timezonefinder==5.2.0
+discord-voice==0.0.0
+PyNaCl==1.4.0
