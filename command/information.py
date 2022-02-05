@@ -32,6 +32,7 @@ class Information(commands.Cog):
         # embed
         embed = Embed( title=f"{data['name']}, {data['sys']['country']} Weather Report", description=f"{data['weather'][0]['description'].capitalize()}", color=0xFBBC04 )
         embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
+        embed.set_thumbnail( url=f"http://openweathermap.org/img/wn/{data['weather'][0]['icon']}@2x.png" )
 
         embed.add_field( name='Unit', value=f"C", inline=True )
         embed.add_field( name='Temperature', value=f"{data['main']['temp']}", inline=True )
@@ -107,10 +108,10 @@ class Information(commands.Cog):
         embed.add_field(name='Top role:', value=member.top_role.mention)
         embed.add_field(name='Status:', value=str(member.status))
 
-        embed.add_field(name=f'Roles {len(roles)}:', value=' '.join([role.mention for role in roles]), inline=False)
+        embed.add_field(name=f'Roles ({len(roles)}):', value=' '.join([role.mention for role in roles]), inline=False)
 
         # add badges
-        embed.add_field(name='Badges: ', value='', inline=False)
+        # embed.add_field(name='Badges: ', value='', inline=False)
 
         embed.add_field(name='Created at:', value=f"`member.created_at.strftime('%#d %B %Y, %-H:%M UTC')`", inline=False)
 

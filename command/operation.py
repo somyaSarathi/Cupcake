@@ -138,12 +138,11 @@ class Operation(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx: commands.Context, member: discord.Member, *, message):
+    async def kick(self, ctx: commands.Context, member: discord.Member, *, message: str=None):
         # trigger typing
         await ctx.trigger_typing()
 
         # kick
-        await member.send(f'you have been kicked out of the server for the following reason(s)\n{message}')
         await member.kick( reason=message )
 
         # reply

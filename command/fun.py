@@ -3,6 +3,7 @@ from random import choice
 from discord.ext import commands
 
 
+
 class Fun(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -14,7 +15,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def flip(self, ctx: commands.Context):
+    async def toss(self, ctx: commands.Context):
         result = choice(['head', 'tail'])
 
         # trigger typing
@@ -26,7 +27,7 @@ class Fun(commands.Cog):
         embed.set_thumbnail( url=f'attachment://{result}.png' )
 
         # reply
-        await ctx.send( file=self.coin[result], embed=embed )
+        await ctx.reply( file=self.coin[result], embed=embed )
 
 
 
