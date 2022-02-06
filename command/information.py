@@ -17,7 +17,7 @@ class Information(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def weather(self, ctx: commands.Context, city: str):
+    async def weather(self, ctx: commands.Context, *, city: str):
         data = wthr(city)
 
         try:
@@ -74,7 +74,6 @@ class Information(commands.Cog):
         else:
             embed = discord.Embed( title='oops! I may have chewed up the power cord.', description='Looks like I did something missrable', color=0xFBBC04 )
             embed.set_image( url='attachment://crime.jpg' )
-            print(error)
 
             # reply
             await ctx.reply( file=imgCrime, embed=embed )
@@ -113,9 +112,9 @@ class Information(commands.Cog):
         # add badges
         # embed.add_field(name='Badges: ', value='', inline=False)
 
-        embed.add_field(name='Created at:', value=f"`member.created_at.strftime('%#d %B %Y, %-H:%M UTC')`", inline=False)
+        embed.add_field(name='Created at:', value=f"`{member.created_at.strftime('%#d %B %Y, %-H:%M UTC')}`", inline=False)
 
-        embed.add_field(name='Joined at:', value=f"`member.joined_at.strftime('%#d %B %Y, %-H:%M UTC')`", inline=False)
+        embed.add_field(name='Joined at:', value=f"`{member.joined_at.strftime('%#d %B %Y, %-H:%M UTC')}`", inline=False)
 
         # add activity
         
@@ -129,7 +128,6 @@ class Information(commands.Cog):
     async def about_error(self, ctx: commands.Context, error):
         # triggering typing instance
         await ctx.trigger_typing()
-        print(error)
 
         if isinstance(error, commands.BadArgument):
             # embed

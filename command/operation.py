@@ -22,7 +22,7 @@ class Operation(commands.Cog):
 
         # delete specific number of messages
         else:
-            num = int(eval(args))
+            num = int(eval(args)+1)
             if num <= 0:
                 raise commands.BadArgument
 
@@ -86,6 +86,27 @@ class Operation(commands.Cog):
         # reply
         await ctx.reply(f'{member.display_name} has been banned from the server')
 
+    
+    @commands.command()
+    @commands.guild_only()
+    @commands.has_permissions(ban_members=True)
+    async def ban(self, ctx: commands.Context, members: commands.Greedy[discord.Member], reason='reason not mentioned'):
+        # trigger typing instance
+        await ctx.trigger_typing()
+        descr = ''
+
+        # ban
+        for member in members:
+            await member.send(f'you have been banned from the "{ctx.guild.name}" server for the following reason(s)\n**reason:** {reason}')
+            await member.ban( reason=reason )
+            descr += f'{member.mention}'
+
+        # reply
+        embed = discord.Embed( title='The following member(s) are banned from the server', description=f'{descr}', color=0xFBBC04 )
+        embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
+
+        await ctx.reply( embed=embed )
+
 
     @ban.error
     async def ban_error(self, ctx: commands.Context, error):
@@ -138,15 +159,27 @@ class Operation(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx: commands.Context, member: discord.Member, *, message: str=None):
+    async def kick(self, ctx: commands.Context, members: commands.Greedy[discord.Member], reason: str=None):
         # trigger typing
+        if len(members) == 0:
+            raise commands.MissingRequiredArgument
+
+        # trigger typing instance
         await ctx.trigger_typing()
+        descr = ''
 
         # kick
-        await member.kick( reason=message )
+        for member in members:
+            await member.send(f'You\'re kicked out of the "{ctx.guild.name}" server for following reason.\n**reason:** {reason}')
+            descr += f'{member.display_name}'
+            # await member.kick( reason=reason )
 
         # reply
-        await ctx.reply(f'{member.display_name} has been kicked out of the server')
+        embed = discord.Embed( title='The following member(s) are kicked out of server', description=descr, color=0xFBBC04 )
+        embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
+        embed.add_field( name='Reason:', value=reason )
+
+        await ctx.send( embed=embed )
 
 
     @kick.error
@@ -169,7 +202,7 @@ class Operation(commands.Cog):
             await ctx.reply( file=imgFetch, embed=embed )
 
         # member doesn't exist
-        elif isinstance(error, commands.MemberNotFound):
+        elif isinstance(error, commands.MemberNotFound) or str(error) == "Command raised an exception: TypeError: __init__() missing 1 required positional argument: 'param'":
             embed = discord.Embed( title='Member doesn\'t exist', description='The mentioned member is not in the server' )
             embed.set_author( name=ctx.author.display_name, icon_url=ctx.author.avatar_url )
             embed.set_image( url='attachment://lost.jpg' )
